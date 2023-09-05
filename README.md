@@ -203,10 +203,10 @@
 
 ```go
 type Podcast struct {
-	ID     primitive.ObjectID `bson:"_id,omitempty"`
-	Title  string             `bson:"title,omitempty"`
-	Author string             `bson:"author,omitempty"`
-	Tags   []string           `bson:"tags,omitempty"`
+	ID     primitive.ObjectID `bson:"_id,omitempty"	   json:"id,omitempty"`
+	Title  string             `bson:"title,omitempty"  json:"title,omitempty"`
+	Author string             `bson:"author,omitempty" json:"author,omitempty"`
+	Tags   []string           `bson:"tags,omitempty"   json:"tags,omitempty"`
 }
 
 type Episode struct {
