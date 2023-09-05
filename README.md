@@ -163,7 +163,7 @@
 	    ctx,
 	    bson.M{"title": "Software Developer"},  // title ı S.Developer olanları filtreliyoruz
 	    bson.D{
-	        {"$set", bson.D{{"author", "Yiğithan Karabulut"}}},  // üstteki filterdan geçen tüm documentlerin author'unu setliyoruz. **Eğer author diye bir field'ı yoksa böyle bu field'ı yeni değeriyle ekler
+	        {"$set", bson.D{{"author", "Yiğithan Karabulut"}}},  // üstteki filterdan geçen tüm documentlerin author'unu setliyoruz. **Eğer author diye bir field'ı yoksa bu field'ı yeni değeriyle ekler
 	    },
 	)
 ```
@@ -172,8 +172,8 @@
 ```go
 	result, err = podcastCollection.ReplaceOne(
 	    ctx,
-	    bson.M{"author": "Yiğithan Karabulut"}, 
-	    bson.M{																		// Üstteki filtreden gelen tüm doc. ların içeriğini aşağıdaki map'e geçtiğimiz k-v larla değiştiriyoruz
+	    bson.M{"author": "Yiğithan Karabulut"}, 	// Filtering
+	    bson.M{					// Üstteki filtreden gelen tüm doc. ların içeriğini aşağıdaki map'e geçtiğimiz key-val'larla değiştiriyoruz
 	        "title":  "The ykarabul times!",
 	        "author": "Yiğit",
 	    },
