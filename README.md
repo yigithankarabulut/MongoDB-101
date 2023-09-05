@@ -5,7 +5,7 @@
 ```go
 
 	serverApi := options.ServerAPI(options.ServerAPIVersion1)
-	opts := options.Client().ApplyURI("mongodb+srv://yigithankarabulut:<password>@cluster0.wqmtmvm.mongodb.net/?retryWrites=true&w=majority").SetServerAPIOptions(serverApi)
+	opts := options.Client().ApplyURI("connection-key").SetServerAPIOptions(serverApi)
 
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 	client, err := mongo.Connect(ctx, opts)
