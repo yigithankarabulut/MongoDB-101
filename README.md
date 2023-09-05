@@ -34,7 +34,7 @@
 ```go
 	newDoc := bson.D{
 		{"key1", "value1"},
-		{"key2", "key2"},
+		{"key2", "value2"},
 		{"tags", bson.A{"development", "programming", "coding"}},
 	}
 
