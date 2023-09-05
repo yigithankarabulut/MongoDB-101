@@ -163,7 +163,7 @@
 	    ctx,
 	    bson.M{"title": "Software Developer"},  // title ı S.Developer olanları filtreliyoruz
 	    bson.D{
-	        {"$set", bson.D{{"author", "Yiğithan Karabulut"}}},  // üstteki filterdan geçen tüm documentlerin author'unu Y.K yapıyoruz
+	        {"$set", bson.D{{"author", "Yiğithan Karabulut"}}},  // üstteki filterdan geçen tüm documentlerin author'unu setliyoruz. **Eğer author diye bir field'ı yoksa böyle bu field'ı yeni değeriyle ekler
 	    },
 	)
 ```
