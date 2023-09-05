@@ -63,6 +63,9 @@
 			{"duration", 32},
 		},
 	})
+	if err != nil {
+		log.Fatal(err)
+	}
 ```
 
 ## Find All Documents
