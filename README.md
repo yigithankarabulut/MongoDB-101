@@ -38,7 +38,7 @@
 		{"tags", bson.A{"development", "programming", "coding"}},
 	}
 
-	insertResult, err := collection.InsertOne(ctx, newDoc)
+	insertResult, err := podcastsCollection.InsertOne(ctx, newDoc)
 
 	if err != nil {
 		log.Fatal(err)
