@@ -199,3 +199,72 @@
 	podcastCollection := databases.Collection("podcasts")
 	podcastCollection.Drop(ctx)
 ```
+## Modeling MongoDB Documents with Native Go Data Structures
+
+```go
+type Podcast struct {
+	ID     primitive.ObjectID `bson:"_id,omitempty"`
+	Title  string             `bson:"title,omitempty"`
+	Author string             `bson:"author,omitempty"`
+	Tags   []string           `bson:"tags,omitempty"`
+}
+
+type Episode struct {
+	ID          primitive.ObjectID `bson:"_id,omitempty"`
+	Podcast     primitive.ObjectID `bson:"podcast,omitempty"`
+	Title       string             `bson:"title,omitempty"`
+	Description string             `bson:"description,omitempty"`
+	Duration    int32              `bson:"duration,omitempty"`
+}
+
+func main() {
+
+	serverApi := options.ServerAPI(options.ServerAPIVersion1)
+	opts := options.Client().ApplyURI("connection-key").SetServerAPIOptions(serverApi)
+
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	client, err := mongo.Connect(ctx, opts)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer client.Disconnect(ctx)
+
+	quickstartDatabase := client.Database("quickstart")
+	podcastsCollection := quickstartDatabase.Collection("podcasts")
+	episodesCollection := quickstartDatabase.Collection("episodes")
+
+	mongoPodcast := Podcast{
+		Title:  "The MongoDB Podcast",
+		Author: "Yiğithan Karabulut",
+		Tags:   []string{"mongodb", "nosql"},
+	}
+
+	insertResult, err := podcastsCollection.InsertOne(ctx, mongoPodcast)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Inserted %v!\n", insertResult.InsertedID)
+
+	var podcasts []Podcast
+	podcastsCursor, err := podcastsCollection.Find(ctx, bson.M{})
+	if err != nil {
+		panic(err)
+	}
+	if err = podcastsCursor.All(ctx, &podcasts); err != nil {
+		panic(err)
+	}
+	fmt.Println(podcasts[1].Author)
+
+	var episodes []Episode
+	episodeCursor, err := episodesCollection.Find(ctx, bson.M{})
+	if err != nil {
+		panic(err)
+	}
+	if err = episodeCursor.All(ctx, &episodes); err != nil {
+		panic(err)
+	}
+	fmt.Println(episodes)
+}
+
+```
