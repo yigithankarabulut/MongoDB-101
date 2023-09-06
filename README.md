@@ -29,7 +29,7 @@
 	episodesCollection := quickstartDatabase.Collection("episodes")
 ```
 
-## Created One Document
+## Create One Document
 
 ```go
 	newDoc := bson.D{
@@ -46,7 +46,7 @@
 
 ```
 
-## Created Multiple Documents
+## Create Multiple Documents
 
 ```go
 	episodeResult, err := episodesCollection.InsertMany(ctx, []interface{}{
@@ -156,7 +156,7 @@
 	)
 ```
 
-## Updates a Multiple Documents
+## Update a Multiple Documents
 
 ```go
 	result, err = podcastCollection.UpdateMany(
@@ -168,7 +168,7 @@
 	)
 ```
 
-### Replaced Document
+### Replace Document
 ```go
 	result, err = podcastCollection.ReplaceOne(
 	    ctx,
@@ -180,7 +180,7 @@
 	)
 ```
 
-## Deleted One Document
+## Delete One Document
 
 ```go
 	result, err := episodesCollection.DeleteOne(ctx, bson.M{"duration": 25})
